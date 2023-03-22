@@ -10,7 +10,6 @@ import java.util.Set;
 
 import seedu.address.model.id.AppointmentId;
 import seedu.address.model.id.PatientId;
-import seedu.address.model.patient.Patient;
 import seedu.address.model.tag.Tag;
 
 /**
