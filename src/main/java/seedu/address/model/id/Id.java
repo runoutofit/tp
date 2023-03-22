@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * guarantees: id is immutable.
  */
 public abstract class Id {
-    private static final AtomicInteger idCounter = new AtomicInteger();
+    private static final AtomicInteger NEXT_ID = new AtomicInteger(0);
 
     private String id;
 
@@ -20,7 +20,7 @@ public abstract class Id {
     }
 
     public static String generateUniqueId() {
-        return Integer.toString(idCounter.getAndIncrement());
+        return Integer.toString(NEXT_ID.getAndIncrement());
     }
 
     @Override
