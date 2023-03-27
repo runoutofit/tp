@@ -9,7 +9,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.id.AppointmentId;
+import seedu.address.model.patient.Name;
 
 /**
  * Deletes the appointment identified by user.
@@ -18,16 +18,16 @@ public class DeleteAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "delete_appt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the appointment identified by the ID.\n"
-            + "Parameters: ID (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the appointment identified by the patient name.\n"
+            + "Parameters: name (must be existing patient name)\n"
+            + "Example: " + COMMAND_WORD + " Alex Yeoh";
+
+    public Name name;
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted Appointment: %1$s";
 
-    private final AppointmentId id;
-
-    public DeleteAppointmentCommand(AppointmentId id) {
-        this.id = id;
+    public DeleteAppointmentCommand(Name name) {
+        this.name = name;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class DeleteAppointmentCommand extends Command {
         requireNonNull(model);
         List<Appointment> lastShownList = model.getFilteredAppointmentList();
         List<Appointment> matchingAppointments =
-                lastShownList.stream().filter(appt -> appt.getAppointmentId().equals(id)).collect(
+                lastShownList.stream().filter(appt -> appt.getName().equals(name)).collect(
                         Collectors.toList());
 
         if (matchingAppointments.size() != 1) {
@@ -51,6 +51,6 @@ public class DeleteAppointmentCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteAppointmentCommand // instanceof handles nulls
-                && id.equals(((DeleteAppointmentCommand) other).id)); // state check
+                && name.equals(((DeleteAppointmentCommand) other).name)); // state check
     }
 }

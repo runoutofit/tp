@@ -4,7 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.id.AppointmentId;
+import seedu.address.model.patient.Name;
 
 /**
  * Parses input command and deletes Appointment object.
@@ -18,8 +18,8 @@ public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentC
      */
     public DeleteAppointmentCommand parse(String args) throws ParseException {
         try {
-            AppointmentId id = ParserUtil.parseAppointmentId(args);
-            return new DeleteAppointmentCommand(id);
+            Name name = ParserUtil.parseName(args);
+            return new DeleteAppointmentCommand(name);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE), pe);
